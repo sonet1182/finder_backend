@@ -24,14 +24,8 @@ Route::post('login', [AuthController::class, 'login'])->name('user.login');
 // Auth Routes...
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('user_info', [AuthController::class, 'user_info']);
 });
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('products', [ProductController::class, 'product_list']);
-
 
 //Area routes
 Route::get('division_list', [AreaController::class, 'division_list']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -194,4 +195,20 @@ class AuthController extends Controller
             }
         }
     }
+
+
+    public function user_info(Request $request)
+    {
+        try {
+            $user = Auth::user(); // Removed 'sanctum'
+            return response()->json([
+                'status' => 200,
+                'data' => $user
+            ]);
+        } catch (\Throwable $e) {
+            return $this->getError($e);
+        }
+    }
+
+
 }
